@@ -4,6 +4,7 @@ _WARNING: I haven't finished ripping all of the code off of my website yet._
 The blog content management system for elitist asshole developers.
 It's dynamic because you don't get enough traffic to warrant static webpages.
 It's flat-file because I don't know how to work with databases and you probably don't enjoy it much.
+It has a php interface because you don't want to learn how to use it like with other elitist asshole content management systems.
 
 ##Key Features:
  * Minimum overhead
