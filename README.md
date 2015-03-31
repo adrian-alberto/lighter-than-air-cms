@@ -1,3 +1,5 @@
+_WARNING: I haven't finished ripping all of the code off of my website yet._
+
 #Lighter Than Air CMS
 The blog content management system for elitist asshole developers.
 It's dynamic because you don't get enough traffic to warrant static webpages.
