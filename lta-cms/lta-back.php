@@ -63,7 +63,7 @@ class LighterThanAir
 {
 	//Returns array of filenames from latest
 	//TODO: skip hidden files
-	function getPosts($count = null, $start = 0)
+	function getPosts($count = null, $start = null)
 	{
 		$posts = array();
 		$output = array();
@@ -74,12 +74,20 @@ class LighterThanAir
 		natsort($posts);
 		
 		$n = 0;
-		for ($i = count($posts) - 1 - $start; $i >= 0; $i--)
+		for ($i = count($posts) - 1; $i >= 0; $i--)
 		{
-			array_push($output, $posts[$i]);
-			$n++;
-			if ($count !== null & $n >= $count)
-				break;
+			//Get id
+			$matches = array();
+			preg_match("#([0-9]+)#", $posts[$i], $matches);
+			if ($start === null | $matches[1] <= $start)
+			{
+				//Count added posts, add post to output
+				$n++;
+				if ($count !== null & $n > $count)
+					break;
+				else
+					array_push($output, $posts[$i]);
+			}
 		}
 
 		return $output;
@@ -105,7 +113,11 @@ class LighterThanAir
 		global $ParseDown, $timezone;
 		if ($file === null)
 		{
-			$file = "content/posts/" . $this->getPosts(1, $post_id)[0];
+			$found = $this->getPosts(1, $post_id);
+			if (count($found) === 1)
+				$file = "content/posts/" . $found[0];
+			else
+				return;
 		}
 
 		if (file_exists($file))
@@ -119,7 +131,7 @@ class LighterThanAir
 		}
 	}
 
-	function outputMultiplePosts($count = null, $start = 0)
+	function outputMultiplePosts($count = null, $start = null)
 	{
 		$filenames = $this->getPosts($count, $start);
 		foreach($filenames as $f)
