@@ -18,3 +18,32 @@ It has a php interface because you don't want to learn how to use it like with o
  * Refactor everything
  * Refactor everything again
  * Blog post editing/removal interface
+
+
+##CMS Architecture
+	Root
+		content
+			posts
+				0001-default-title.md
+				0002-second-post.md
+			images
+				test.png
+			blog-meta.json
+			atom.xml
+		lta-cms
+			lta-front.js
+			lta-back.php
+			interface.php
+		css
+			example.css
+		index.php
+		.htaccess
+
+##Blog post metadata format
+	{
+		"TITLE": "Default",
+		"DATE": 0,
+		"UPDATED": 0,
+		"ID": "tag:whitecollargames.com,1970-01-01:0:1",
+		"CATEGORIES":[]
+	}

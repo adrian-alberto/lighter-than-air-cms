@@ -1,50 +1,23 @@
 <?php
-/*
-//Blog post metadata format
-{
-	"TITLE": "Default",
-	"DATE": 0,
-	"UPDATED": 0,
-	"ID": "tag:whitecollargames.com,1970-01-01:0:1",
-	"CATEGORIES":[]
-}
-
-//CMS Architecture
-Root
-	content
-		posts
-			0001-default-title.md
-			0002-second-post.md
-		images
-			test.png
-		blog-meta.json
-		atom.xml
-	lta-cms
-		lta-front.js
-		lta-back.php
-		interface.php
-	css
-		example.css
-	index.php
-	.htaccess
-*/
-
 require "lta-cms/parsedown.php";
 $ParseDown = new ParseDown();
-
-
-$blog_meta;
-if (file_exists("content/blog-meta.json"))
-	$blog_meta = json_decode(file_get_contents("content/blog-meta.json"));
-else
-	trigger_error("Missing LTA metadata.");
 
  //TODO: Pull these from $blog_meta
 $tag_url = "whitecollargames.com";
 $timezone = -8;
 
+if (file_exists("content/blog-meta.json"))
+	$blog_meta = json_decode(file_get_contents("content/blog-meta.json"));
+else
+	trigger_error("Missing LTA metadata.");
 
+//This gets used a lot, globalizing is a good idea.
+$posts = array();
+foreach (preg_grep("#[0-9]+.*\.md#", scandir("content/posts")) as $filename)
+	array_push($posts, $filename);
+natsort($posts);
 
+#####################################################################################
 class Header
 {
 	public $TITLE;
@@ -58,20 +31,15 @@ class Header
 
 	}
 }
-
+#####################################################################################
 class LighterThanAir
 {
 	//Returns array of filenames from latest
 	//TODO: skip hidden files
 	function getPosts($count = null, $start = null)
 	{
-		$posts = array();
+		global $posts;
 		$output = array();
-
-		foreach (preg_grep("#[0-9]+.*\.md#", scandir("content/posts")) as $filename)
-			array_push($posts, $filename);
-
-		natsort($posts);
 		
 		$n = 0;
 		for ($i = count($posts) - 1; $i >= 0; $i--)
@@ -79,7 +47,7 @@ class LighterThanAir
 			//Get id
 			$matches = array();
 			preg_match("#([0-9]+)#", $posts[$i], $matches);
-			if ($start === null | $matches[1] <= $start)
+			if ($start === null | (int) $matches[1] <= $start)
 			{
 				//Count added posts, add post to output
 				$n++;
@@ -91,6 +59,21 @@ class LighterThanAir
 		}
 
 		return $output;
+	}
+
+	//Returns latest id
+	function getLatestPost()
+	{
+		$found = $this->getPosts(1);
+		if (count($found) === 1)
+		{
+			//pull id out of filename
+			$matches = array();
+			preg_match("<([0-9]+).*\.md>", $found[0], $matches);
+			return (int) $matches[1];
+		}
+		else
+			return;
 	}
 
 	function getMarkdownContent($file)
