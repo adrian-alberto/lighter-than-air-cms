@@ -1,19 +1,20 @@
 <?php
-require "lta-cms/parsedown.php";
+define("ROOT", $_SERVER["DOCUMENT_ROOT"]);
+require ROOT."/lta-cms/parsedown.php";
 $ParseDown = new ParseDown();
 
  //TODO: Pull these from $blog_meta
 $tag_url = "whitecollargames.com";
 $timezone = -8;
 
-if (file_exists("content/blog-meta.json"))
-	$blog_meta = json_decode(file_get_contents("content/blog-meta.json"));
+if (file_exists(ROOT."/content/blog-meta.json"))
+	$blog_meta = json_decode(file_get_contents(ROOT."/content/blog-meta.json"));
 else
 	trigger_error("Missing LTA metadata.");
 
 //This gets used a lot, globalizing is a good idea.
 $posts = array();
-foreach (preg_grep("#[0-9]+.*\.md#", scandir("content/posts")) as $filename)
+foreach (preg_grep("#[0-9]+.*\.md#", scandir(ROOT."/content/posts")) as $filename)
 	array_push($posts, $filename);
 natsort($posts);
 
@@ -98,7 +99,7 @@ class LighterThanAir
 		{
 			$found = $this->getPosts(1, $post_id);
 			if (count($found) === 1)
-				$file = "content/posts/" . $found[0];
+				$file = ROOT."/content/posts/" . $found[0];
 			else
 				return;
 		}
@@ -108,7 +109,7 @@ class LighterThanAir
 			$header = $this->getHeader($file);
 
 			$date = date("F d, Y", $header->DATE + 3600 * $timezone);
-			$output = "<div id='post_{$post_id}' class='article'>\n<a href='#' class='stamp'>{$date}</a>";
+			$output = "<div id='post_{$post_id}' class='article'>\n<a href='#post_{$post_id}' class='stamp'>{$date}</a>";
 			$output .= $ParseDown->text($this->getMarkdownContent($file));
 			echo $output . "</div>";
 		}
@@ -121,10 +122,9 @@ class LighterThanAir
 		{
 			$matches = array();
 			preg_match("<([0-9]+).*\.md>", $f, $matches);
-			$this->outputPost($matches[1], "content/posts/{$f}");
+			$this->outputPost($matches[1], ROOT."/content/posts/{$f}");
 		}
 	}
 
 }
-
 ?>

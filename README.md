@@ -18,6 +18,7 @@ It has a php interface because you don't want to learn how to use it like with o
  * Refactor everything
  * Refactor everything again
  * Blog post editing/removal interface
+ * Re-implement Atom feed generation 
 
 
 ##CMS Architecture
@@ -30,9 +31,13 @@ It has a php interface because you don't want to learn how to use it like with o
 				test.png
 			blog-meta.json
 			atom.xml
+		js
+			jquery-1.11.2.min.js
+			pagedown.js
 		lta-cms
 			lta-front.js
 			lta-back.php
+			parsedown.php
 			interface.php
 		css
 			example.css
