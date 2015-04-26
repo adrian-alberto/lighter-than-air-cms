@@ -8,15 +8,15 @@
 	</head>
 
 	<body>
+		<a style="float:right; padding:10px;" href="/lta/login">log in</a>
 		<div id="content">
-			
 			<div id="posts">
 				
 				<div style="text-align:center; padding-bottom:30px">
-				<img src="/css/img/testlogo.png" alt="???" style="display:block; width: 160px; margin-left:auto; margin-right:auto;">
-				<h2 style="margin-bottom:0; margin-top:0">Your Pretentious Dev Blog</h2>
-				<p style="margin-top:0; margin-bottom:10px">What even is that? Is that a turtle? Gecko?</p>
-				<hr style="position:absolute; left:0; width:100%">
+					<img src="/css/img/testlogo.png" alt="???" style="display:block; width: 160px; margin-left:auto; margin-right:auto;">
+					<h2 style="margin-bottom:0; margin-top:0">Your Pretentious Dev Blog</h2>
+					<p style="margin-top:0; margin-bottom:10px">What even is that? Is that a turtle? Gecko?</p>
+					<hr style="position:absolute; left:0; width:100%">
 				</div>
 
 				<?php

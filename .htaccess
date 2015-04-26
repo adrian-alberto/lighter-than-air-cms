@@ -1,0 +1,8 @@
+Options -MultiViews
+Options +FollowSymLinks
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule (.*) $1.php
+RewriteRule ^lta/(.+)$ lta\-cms/interface/$1 [L]

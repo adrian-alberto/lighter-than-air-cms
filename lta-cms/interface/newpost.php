@@ -1,3 +1,11 @@
+<?php
+	session_start();
+	if (!isset($_SESSION["isAdmin"])) {
+		header("Location: http://" . $_SERVER["HTTP_HOST"] . "/lta/login");
+		die();
+	}
+?>
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,18 +19,18 @@
 		<script src="/js/pagedown.js"></script>
 	</head>
 	<body>
-		<div id="content" style="padding:40px; width:1200px;">	
+		<div id="content" style="padding:40px; width:1000px;">	
 
-			<div style="float:left; width:calc(50% - 20px);">
+			<div style="float:left; width:350px;">
 				<h2>Create a New Post:</h2>
 				
-				<form action="/php/newpost.php" method="post" id="postForm">
+				<form action="/lta-cms/action-newpost" method="post" id="postForm">
 
 					Title:<br>
 					<input id="postTitle" type="text" style="width:100%;" name="postTitle"><br><br>
 
 					Categories:<br>
-					<i style="font-size:70%;">Separate categories with commas. Use only numbers, letters, and spaces.</i><br>
+					<i style="font-size:70%;">Separate categories with commas.<br>Use only numbers, letters, and spaces.</i><br>
 					<input id="postCategories" type="text" style="width:100%;" name="postCategories"><br><br>
 
 					Markdown Content:<br>
@@ -30,19 +38,19 @@
 
 					<input type="submit">
 				</form>
+				<hr>
+				<a href="login">Log out</a>
 			</div>
 
-			<div style="float:right; width:50%;">
+			<div style="float:right; width:600px;">
 				<h2>Live Preview:</h2>
 
-				<div id="wysiwyg" class="article">
-					hello
-				</div>
+				<div id="wysiwyg" class="article"></div>
 
-				<p>
+				<i style="font-size:70%;">
 					Previously used categories:<br>
 					<?php
-						require "lta-back.php";
+						require $_SERVER["DOCUMENT_ROOT"] . "/lta-cms/lta-back.php";
 						$LTACMS = new LighterThanAir();
 						$categories = array();
 						foreach ($LTACMS->getPosts() as $x)
@@ -56,8 +64,10 @@
 						foreach ($categories as $x)
 							echo $x . ", ";
 					?>
-				</p>
+				</i>
 			</div>
+
+			<div style="clear:both; height:40px;">&nbsp;</div>
 			
 			<script type="text/javascript">
 				var converter = new Markdown.Converter();

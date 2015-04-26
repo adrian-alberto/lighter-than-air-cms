@@ -13,7 +13,7 @@ It has a php interface because you don't want to learn how to use it like with o
  * No databases (file operated)
 
 ##Things I need to do:
- * Secure posting interface so it can be used online
+ * Secure the login & reimplement posting
  * Add category groups
  * Refactor everything
  * Refactor everything again
@@ -25,22 +25,25 @@ It has a php interface because you don't want to learn how to use it like with o
 	Root
 		content
 			posts
+				0000-test-post.md
 				0001-default-title.md
 				0002-second-post.md
 			images
 				test.png
 			blog-meta.json
 			atom.xml
+		css
+			example.css
 		js
 			jquery-1.11.2.min.js
 			pagedown.js
 		lta-cms
-			lta-front.js
+			interface
+				login.php
+				newpost.php
 			lta-back.php
+			lta-login-form
 			parsedown.php
-			interface.php
-		css
-			example.css
 		index.php
 		.htaccess
 
