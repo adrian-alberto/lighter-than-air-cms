@@ -5,4 +5,5 @@ RewriteBase /
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule (.*) $1.php
-RewriteRule ^lta/(.+)$ lta\-cms/interface/$1 [L]
+RewriteRule post\/(\d+) ?id=$1
+RewriteRule ^lta\/(.+)$ lta\-cms/interface/$1
