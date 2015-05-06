@@ -20,7 +20,7 @@
 				</div>
 
 				<?php
-					require "/lta-cms/lta-back.php";
+					require "lta-cms/lta-back.php";
 					$LTACMS = new LighterThanAir();
 
 					@$post_id = htmlspecialchars($_GET["id"]);
