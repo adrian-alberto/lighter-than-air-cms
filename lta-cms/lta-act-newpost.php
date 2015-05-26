@@ -1,4 +1,14 @@
 <?php
+    #
+    #   TODO: Forgot to set $categories on line 20
+    #
+
+    session_start();
+    if (!isset($_SESSION["isAdmin"])) {
+        header("Location: http://" . $_SERVER["HTTP_HOST"] . "/lta/login");
+        die();
+    }
+
     require "lta-back.php";
     $LTACMS = new LighterThanAir();
     $post_directory = $_SERVER["DOCUMENT_ROOT"] .  "/content/posts/";
