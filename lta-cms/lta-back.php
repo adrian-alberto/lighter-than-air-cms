@@ -93,7 +93,7 @@ class LighterThanAir
 		$header = new Header();
 		$header->TITLE = $post_title;
 		$header->CATEGORIES = $post_categories;
-		$header->ID = $post_id;
+		$header->ID = $post_id; //TODO: full id for atom usage
 		$header->DATE = $time;
 		$header->UPDATED = $time;
 		return "<!--" . json_encode($header) . "-->";
