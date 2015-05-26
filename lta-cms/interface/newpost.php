@@ -24,7 +24,7 @@
 			<div style="float:left; width:350px;">
 				<h2>Create a New Post:</h2>
 				
-				<form action="/lta-cms/action-newpost" method="post" id="postForm">
+				<form action="/lta-cms/lta-act-newpost.php" method="post" id="postForm">
 
 					Title:<br>
 					<input id="postTitle" type="text" style="width:100%;" name="postTitle"><br><br>

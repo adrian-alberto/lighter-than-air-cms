@@ -26,11 +26,6 @@ class Header
 	public $UPDATED;
 	public $ID = 0;
 	public $CATEGORIES;
-
-	function __construct($file) //
-	{
-
-	}
 }
 #####################################################################################
 class LighterThanAir
@@ -90,6 +85,18 @@ class LighterThanAir
 		$matches = array();
 		preg_match("#^<!--(.+)-->#", $content, $matches);
 		return json_decode($matches[1]);
+	}
+
+	function generateNextHeader($post_title, $post_categories, $post_id)
+	{
+		$time = time();
+		$header = new Header();
+		$header->TITLE = $post_title;
+		$header->CATEGORIES = $post_categories;
+		$header->ID = $post_id;
+		$header->DATE = $time;
+		$header->UPDATED = $time;
+		return "<!--" . json_encode($header) . "-->";
 	}
 
 	function outputPost($post_id, $file = null)
