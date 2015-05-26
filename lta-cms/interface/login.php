@@ -31,7 +31,7 @@
 	</head>
 	<body id="content" style="padding-top:60px; width:400px">
 		<?php
-			require $_SERVER["DOCUMENT_ROOT"] . "/lta-cms/lta-login-form";
+			require $_SERVER["DOCUMENT_ROOT"] . "/lta-cms/lta-login-form.php";
 		?>
 	</body>
 </html>
