@@ -107,10 +107,11 @@ class LighterThanAir
 	function generateNextHeader($post_title, $post_categories, $post_id)
 	{
 		$time = time();
+		$formattedDate = date("Y-m-d", $time);
 		$header = new Header();
 		$header->TITLE = $post_title;
-		$header->CATEGORIES = $post_categories;
-		$header->ID = $post_id; //TODO: full id for atom usage
+		$header->CATEGORIES = $post_categories[1];
+		$header->ID = "tag:{$tag_url},{$formattedDate}:{$time}:" . $post_id;
 		$header->DATE = $time;
 		$header->UPDATED = $time;
 		return "<!--" . json_encode($header) . "-->";
