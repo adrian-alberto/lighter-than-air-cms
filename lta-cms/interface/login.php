@@ -1,13 +1,15 @@
 <?php
 	session_start();
 	session_unset();
+	require $_SERVER["DOCUMENT_ROOT"] . "/lta-cms/lta-back.php";
+	$LTACMS = new LighterThanAir();
 	if (@$_POST["username"] !== null && @$_POST["password"] !== null)
 	{
 		$username = $_POST["username"];
 		$password = $_POST["password"];
 
 		# THIS IS OBVIOUSLY TEMPORARY!@!$#!#AVFGDadfasdf
-		if ($username === "admin" && $password === "password")
+		if ($username === "admin" && password_verify($password, $LTACMS->getPasswordHash()))
 		{
 			$_SESSION["isAdmin"] = true;
 			#change this to the panel instead of the new post interface

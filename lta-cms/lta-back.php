@@ -30,6 +30,23 @@ class Header
 #####################################################################################
 class LighterThanAir
 {
+	function getPasswordHash()
+	{
+		$passFile = dirname($_SERVER["DOCUMENT_ROOT"]) . "/ltapass";
+		if (!file_exists($passFile))
+		{
+			file_put_contents($passFile, password_hash("password", PASSWORD_DEFAULT));
+		}
+		return file_get_contents($passFile);
+	}
+
+	function setPassword($pass)
+	{
+		$passFile = dirname($_SERVER["DOCUMENT_ROOT"]) . "/ltapass";
+		file_put_contents($passFile, password_hash($pass, PASSWORD_DEFAULT));
+	}
+
+
 	//Returns array of filenames from latest
 	//TODO: skip hidden files
 	function getPosts($count = null, $start = null)

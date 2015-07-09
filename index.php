@@ -22,13 +22,12 @@
 				<?php
 					require "lta-cms/lta-back.php";
 					$LTACMS = new LighterThanAir();
-
+					
 					@$post_id = htmlspecialchars($_GET["id"]);
 					if ($post_id !== null && preg_match("<^\d+$>", $post_id) === 1)
 						$LTACMS->outputPost($post_id);
 					else
 						$LTACMS->outputMultiplePosts();
-					
 				?>
 			</div>
 		</div>
